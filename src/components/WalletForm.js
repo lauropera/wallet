@@ -46,7 +46,7 @@ class WalletForm extends Component {
     return (
       <form onSubmit={ this.handleSubmit }>
         <label htmlFor="valueInput">
-          Valor:
+          Valor
           <input
             type="number"
             name="value"
@@ -56,32 +56,47 @@ class WalletForm extends Component {
             data-testid="value-input"
           />
         </label>
-        <select
-          name="currency"
-          onChange={ this.handleChange }
-          data-testid="currency-input"
-        >
-          {currencies.map((curr) => (
-            <option key={ curr }>{curr}</option>
-          ))}
-        </select>
-        <select
-          name="method"
-          onChange={ this.handleChange }
-          data-testid="method-input"
-        >
+        <label htmlFor="currency">
+          Moeda
+          <select
+            name="currency"
+            id="currency"
+            onChange={ this.handleChange }
+            data-testid="currency-input"
+          >
+            {currencies.map((curr) => (
+              <option key={ curr }>{curr}</option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="method">
           Método de pagamento
-          <option>Dinheiro</option>
-          <option>Cartão de crédito</option>
-          <option>Cartão de débito</option>
-        </select>
-        <select name="tag" onChange={ this.handleChange } data-testid="tag-input">
-          <option>Alimentação</option>
-          <option>Lazer</option>
-          <option>Trabalho</option>
-          <option>Transporte</option>
-          <option>Saúde</option>
-        </select>
+          <select
+            name="method"
+            id="method"
+            onChange={ this.handleChange }
+            data-testid="method-input"
+          >
+            <option>Dinheiro</option>
+            <option>Cartão de crédito</option>
+            <option>Cartão de débito</option>
+          </select>
+        </label>
+        <label htmlFor="tag">
+          Categoria
+          <select
+            name="tag"
+            id="tag"
+            onChange={ this.handleChange }
+            data-testid="tag-input"
+          >
+            <option>Alimentação</option>
+            <option>Lazer</option>
+            <option>Trabalho</option>
+            <option>Transporte</option>
+            <option>Saúde</option>
+          </select>
+        </label>
         <label htmlFor="descInput">
           Descrição:
           <input

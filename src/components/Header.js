@@ -6,9 +6,9 @@ class Header extends Component {
   totalExpenses = () => {
     const { expenses } = this.props;
     const totalValue = expenses.reduce((acc, curr) => (
-      acc + curr.exchangeRates[curr.currency].ask * curr.value
-    ), 0);
-    return totalValue.toFixed(2);
+      acc + (curr.exchangeRates[curr.currency].ask * curr.value)
+    ), 0).toFixed(2);
+    return totalValue;
   };
 
   render() {
