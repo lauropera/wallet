@@ -2,7 +2,7 @@ import getCurrencies from '../../services/getCurrencies';
 
 export const USER_LOGIN = 'USER_LOGIN';
 export const SAVE_CURRENCIES = 'SAVE_CURRENCIES';
-export const IS_FETCHING = 'IS_FETCHING';
+export const SAVE_EXPENSE = 'SAVE_EXPENSE';
 
 export const userLogin = (payload) => ({
   type: USER_LOGIN,
@@ -14,21 +14,30 @@ export const saveCurrencies = (payload) => ({
   payload,
 });
 
+export const saveNewExpense = (payload) => ({
+  type: SAVE_EXPENSE,
+  payload,
+});
+
 export const fetchCurrencies = () => async (dispatch) => {
   try {
     const currencies = await getCurrencies();
-    const currsWithoutUSDT = Object.keys(currencies)
-      .filter((curr) => curr !== 'USDT');
-    dispatch(saveCurrencies(currsWithoutUSDT));
+    const dataWithoutUSDT = Object.entries(currencies)
+      .filter((elem) => elem[0] !== 'USDT');
+    const newData = Object.fromEntries(dataWithoutUSDT);
+    dispatch(saveCurrencies(Object.keys(newData)));
   } catch (error) {
     return error;
   }
 };
 
-export const getExchangeRate = () => async (dispatch) => {
+export const newExpense = (expense) => async (dispatch) => {
   try {
     const currencies = await getCurrencies();
-    return currencies;
+    dispatch(saveNewExpense({
+      ...expense,
+      exchangeRates: currencies,
+    }));
   } catch (error) {
     return error;
   }

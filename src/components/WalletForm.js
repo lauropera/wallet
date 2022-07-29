@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchCurrencies as fetchCurrenciesThunk } from '../redux/actions';
+import {
+  fetchCurrencies as fetchCurrenciesThunk,
+  newExpense,
+} from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
@@ -25,6 +28,14 @@ class WalletForm extends Component {
     this.setState({ [name]: value });
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { saveNewExpense } = this.props;
+    saveNewExpense(this.state);
+    this.setState({ value: '0', description: '' });
+    event.target.reset();
+  };
+
   saveCurrencies = async () => {
     const { fetchCurrencies } = this.props;
     fetchCurrencies();
@@ -33,7 +44,7 @@ class WalletForm extends Component {
   render() {
     const { currencies } = this.props;
     return (
-      <form>
+      <form onSubmit={ this.handleSubmit }>
         <label htmlFor="valueInput">
           Valor:
           <input
@@ -59,6 +70,7 @@ class WalletForm extends Component {
           onChange={ this.handleChange }
           data-testid="method-input"
         >
+          Método de pagamento
           <option>Dinheiro</option>
           <option>Cartão de crédito</option>
           <option>Cartão de débito</option>
@@ -88,15 +100,18 @@ class WalletForm extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchCurrenciesThunk()),
+  saveNewExpense: (expense) => dispatch(newExpense(expense)),
 });
 
 WalletForm.propTypes = {
   fetchCurrencies: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  saveNewExpense: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
