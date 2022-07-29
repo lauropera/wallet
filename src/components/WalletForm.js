@@ -4,65 +4,49 @@ import { connect } from 'react-redux';
 import { fetchCurrencies as fetchCurrenciesThunk } from '../redux/actions';
 
 class WalletForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isLoading: false,
-    };
-  }
-
   componentDidMount() {
     this.saveCurrencies();
   }
 
   saveCurrencies = async () => {
     const { fetchCurrencies } = this.props;
-    this.setState({ isLoading: true });
     fetchCurrencies();
-    this.setState({ isLoading: false });
   };
 
   render() {
-    const { isLoading } = this.state;
     const { currencies } = this.props;
     console.log(currencies);
     return (
       <form>
-        {isLoading ? (
-          <p>Carregando</p>
-        ) : (
-          <>
-            <label htmlFor="valueInput">
-              Valor:
-              <input type="number" id="valueInput" data-testid="value-input" />
-            </label>
-            <select data-testid="currency-input">
-              {currencies.map((curr) => (
-                <option key={ curr }>{curr}</option>
-              ))}
-            </select>
-            <select data-testid="method-input">
-              <option>Dinheiro</option>
-              <option>Cartão de crédito</option>
-              <option>Cartão de débito</option>
-            </select>
-            <select data-testid="tag-input">
-              <option>Alimentação</option>
-              <option>Lazer</option>
-              <option>Trabalho</option>
-              <option>Transporte</option>
-              <option>Saúde</option>
-            </select>
-            <label htmlFor="descInput">
-              Descrição:
-              <input
-                type="text"
-                id="descInput"
-                data-testid="description-input"
-              />
-            </label>
-          </>
-        )}
+        <label htmlFor="valueInput">
+          Valor:
+          <input type="number" id="valueInput" data-testid="value-input" />
+        </label>
+        <select data-testid="currency-input">
+          {currencies.map((curr) => (
+            <option key={ curr }>{curr}</option>
+          ))}
+        </select>
+        <select data-testid="method-input">
+          <option>Dinheiro</option>
+          <option>Cartão de crédito</option>
+          <option>Cartão de débito</option>
+        </select>
+        <select data-testid="tag-input">
+          <option>Alimentação</option>
+          <option>Lazer</option>
+          <option>Trabalho</option>
+          <option>Transporte</option>
+          <option>Saúde</option>
+        </select>
+        <label htmlFor="descInput">
+          Descrição:
+          <input
+            type="text"
+            id="descInput"
+            data-testid="description-input"
+          />
+        </label>
       </form>
     );
   }
