@@ -24,3 +24,12 @@ export const fetchCurrencies = () => async (dispatch) => {
     return error;
   }
 };
+
+export const getExchangeRate = () => async (dispatch) => {
+  try {
+    const currencies = await getCurrencies();
+    return currencies;
+  } catch (error) {
+    return error;
+  }
+};
