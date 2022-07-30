@@ -1,10 +1,22 @@
-import { DELETE_EXPENSE, SAVE_CURRENCIES, SAVE_EXPENSE } from '../actions';
+import {
+  DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  SAVE_CURRENCIES,
+  SAVE_NEW_EXPENSE,
+  SAVE_EDITED_EXPENSE,
+} from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  editor: false, // valor booleano que indica de uma despesa está sendo editada
-  idToEdit: 0, // valor numérico que armazena o id da despesa que esta sendo editada
+  editor: false,
+  idToEdit: 0,
+  expenseToEdit: {},
+};
+
+const updatedExpenses = (allExpenses, idToEdit, edited) => {
+  allExpenses[idToEdit] = edited;
+  return allExpenses;
 };
 
 function wallet(state = INITIAL_STATE, action) {
@@ -14,20 +26,43 @@ function wallet(state = INITIAL_STATE, action) {
       ...state,
       currencies: action.payload,
     };
-  case SAVE_EXPENSE:
+
+  case SAVE_NEW_EXPENSE:
     return {
       ...state,
-      expenses: [...state.expenses, {
-        id: state.expenses.length,
-        ...action.payload,
-      }],
+      expenses: [
+        ...state.expenses,
+        {
+          id: state.expenses.length,
+          ...action.payload,
+        },
+      ],
     };
+
   case DELETE_EXPENSE:
     return {
       ...state,
-      expenses: state.expenses
-        .filter(({ id }) => id !== action.payload),
+      expenses: state.expenses.filter(({ id }) => id !== action.payload),
     };
+
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      editor: true,
+      idToEdit: action.payload,
+      expenseToEdit: state.expenses.find(({ id }) => id === action.payload),
+    };
+
+  case SAVE_EDITED_EXPENSE:
+    return {
+      ...state,
+      editor: false,
+      expenses: [
+        ...updatedExpenses(state.expenses, state.idToEdit, action.payload),
+      ],
+      idToEdit: 0,
+    };
+
   default:
     return state;
   }

@@ -3,20 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   fetchCurrencies as fetchCurrenciesThunk,
-  newExpense,
+  newExpense as newExpenseAction,
+  saveEditedExpense as saveEditedExpenseAction,
 } from '../redux/actions';
+
+const INITIAL_STATE = {
+  value: '0',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+  description: '',
+};
 
 class WalletForm extends Component {
   constructor() {
     super();
-
-    this.state = {
-      value: '0',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-      description: '',
-    };
+    this.state = INITIAL_STATE;
   }
 
   componentDidMount() {
@@ -30,10 +32,11 @@ class WalletForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { saveNewExpense } = this.props;
-    saveNewExpense(this.state);
-    this.setState({ value: '0', description: '' });
-    event.target.reset();
+    const { saveNewExpense, editor, editExpense, expenseToEdit } = this.props;
+    if (editor) {
+      editExpense({ ...expenseToEdit, ...this.state });
+    } else saveNewExpense(this.state);
+    this.setState(INITIAL_STATE);
   };
 
   saveCurrencies = async () => {
@@ -42,7 +45,8 @@ class WalletForm extends Component {
   };
 
   render() {
-    const { currencies } = this.props;
+    const { currencies, editor } = this.props;
+    const { value, currency, method, tag, description } = this.state;
     return (
       <form onSubmit={ this.handleSubmit }>
         <label htmlFor="valueInput">
@@ -52,6 +56,7 @@ class WalletForm extends Component {
             name="value"
             id="valueInput"
             min="0"
+            value={ value }
             onChange={ this.handleChange }
             data-testid="value-input"
           />
@@ -61,6 +66,7 @@ class WalletForm extends Component {
           <select
             name="currency"
             id="currency"
+            value={ currency }
             onChange={ this.handleChange }
             data-testid="currency-input"
           >
@@ -74,6 +80,7 @@ class WalletForm extends Component {
           <select
             name="method"
             id="method"
+            value={ method }
             onChange={ this.handleChange }
             data-testid="method-input"
           >
@@ -87,6 +94,7 @@ class WalletForm extends Component {
           <select
             name="tag"
             id="tag"
+            value={ tag }
             onChange={ this.handleChange }
             data-testid="tag-input"
           >
@@ -103,11 +111,16 @@ class WalletForm extends Component {
             type="text"
             id="descInput"
             name="description"
+            value={ description }
             onChange={ this.handleChange }
             data-testid="description-input"
           />
         </label>
-        <button type="submit">Adicionar despesa</button>
+        {editor ? (
+          <button type="submit">Editar despesa</button>
+        ) : (
+          <button type="submit">Adicionar despesa</button>
+        )}
       </form>
     );
   }
@@ -115,18 +128,29 @@ class WalletForm extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
-  expenses: state.wallet.expenses,
+  editor: state.wallet.editor,
+  expenseToEdit: state.wallet.expenseToEdit,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchCurrenciesThunk()),
-  saveNewExpense: (expense) => dispatch(newExpense(expense)),
+  saveNewExpense: (expense) => dispatch(newExpenseAction(expense)),
+  editExpense: (expense) => dispatch(saveEditedExpenseAction(expense)),
 });
 
 WalletForm.propTypes = {
   fetchCurrencies: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  editor: PropTypes.bool.isRequired,
+  expenseToEdit: PropTypes.shape({
+    value: PropTypes.string,
+    currency: PropTypes.string,
+    method: PropTypes.string,
+    tag: PropTypes.string,
+    description: PropTypes.string,
+  }).isRequired,
   saveNewExpense: PropTypes.func.isRequired,
+  editExpense: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
