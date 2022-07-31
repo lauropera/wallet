@@ -8,7 +8,7 @@ import {
 } from '../redux/actions';
 
 const INITIAL_STATE = {
-  value: '0',
+  value: '',
   currency: 'USD',
   method: 'Dinheiro',
   tag: 'Alimentação',
