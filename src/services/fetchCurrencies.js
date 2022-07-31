@@ -1,4 +1,4 @@
-async function getCurrencies() {
+async function fetchCurrencies() {
   const ENDPOINT = 'https://economia.awesomeapi.com.br/json/all';
   try {
     const response = await fetch(ENDPOINT);
@@ -9,4 +9,4 @@ async function getCurrencies() {
   }
 }
 
-export default getCurrencies;
+export default fetchCurrencies;

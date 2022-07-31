@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  fetchCurrencies as fetchCurrenciesThunk,
+  getCurrencies as getCurrenciesThunk,
   newExpense as newExpenseAction,
   saveEditedExpense as saveEditedExpenseAction,
 } from '../redux/actions';
@@ -40,8 +40,8 @@ class WalletForm extends Component {
   };
 
   saveCurrencies = async () => {
-    const { fetchCurrencies } = this.props;
-    fetchCurrencies();
+    const { getCurrencies } = this.props;
+    getCurrencies();
   };
 
   render() {
@@ -133,13 +133,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCurrencies: () => dispatch(fetchCurrenciesThunk()),
+  getCurrencies: () => dispatch(getCurrenciesThunk()),
   saveNewExpense: (expense) => dispatch(newExpenseAction(expense)),
   editExpense: (expense) => dispatch(saveEditedExpenseAction(expense)),
 });
 
 WalletForm.propTypes = {
-  fetchCurrencies: PropTypes.func.isRequired,
+  getCurrencies: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   editor: PropTypes.bool.isRequired,
   expenseToEdit: PropTypes.shape({

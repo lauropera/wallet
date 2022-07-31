@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   editor: false,
   idToEdit: 0,
   expenseToEdit: {},
+  error: null,
 };
 
 const updatedExpenses = (allExpenses, idToEdit, edited) => {
@@ -26,7 +27,6 @@ function wallet(state = INITIAL_STATE, action) {
       ...state,
       currencies: action.payload,
     };
-
   case SAVE_NEW_EXPENSE:
     return {
       ...state,
@@ -38,13 +38,11 @@ function wallet(state = INITIAL_STATE, action) {
         },
       ],
     };
-
   case DELETE_EXPENSE:
     return {
       ...state,
       expenses: state.expenses.filter(({ id }) => id !== action.payload),
     };
-
   case EDIT_EXPENSE:
     return {
       ...state,
@@ -52,7 +50,6 @@ function wallet(state = INITIAL_STATE, action) {
       idToEdit: action.payload,
       expenseToEdit: state.expenses.find(({ id }) => id === action.payload),
     };
-
   case SAVE_EDITED_EXPENSE:
     return {
       ...state,
@@ -62,7 +59,6 @@ function wallet(state = INITIAL_STATE, action) {
       ],
       idToEdit: 0,
     };
-
   default:
     return state;
   }
