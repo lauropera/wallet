@@ -5,12 +5,13 @@ import {
   deleteExpense as deleteExpenseAction,
   editExpense as editExpenseAction,
 } from '../redux/actions';
+import '../styles/Table.css';
 
 class Table extends Component {
   render() {
     const { expenses, deleteExpense, editExpense } = this.props;
     return (
-      <div>
+      <div className="Table-Container">
         <table>
           <thead>
             <tr>

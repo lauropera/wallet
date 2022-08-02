@@ -6,6 +6,7 @@ import {
   newExpense as newExpenseAction,
   saveEditedExpense as saveEditedExpenseAction,
 } from '../redux/actions';
+import '../styles/WalletForm.css';
 
 const INITIAL_STATE = {
   value: '',
@@ -48,33 +49,35 @@ class WalletForm extends Component {
     const { currencies, editor } = this.props;
     const { value, currency, method, tag, description } = this.state;
     return (
-      <form onSubmit={ this.handleSubmit }>
-        <label htmlFor="valueInput">
-          Valor
-          <input
-            type="number"
-            name="value"
-            id="valueInput"
-            min="0"
-            value={ value }
-            onChange={ this.handleChange }
-            data-testid="value-input"
-          />
-        </label>
-        <label htmlFor="currency">
-          Moeda
-          <select
-            name="currency"
-            id="currency"
-            value={ currency }
-            onChange={ this.handleChange }
-            data-testid="currency-input"
-          >
-            {currencies.map((curr) => (
-              <option key={ curr }>{curr}</option>
-            ))}
-          </select>
-        </label>
+      <form onSubmit={ this.handleSubmit } className="Wallet-Form">
+        <div className="Value-Currency">
+          <label htmlFor="valueInput">
+            Valor
+            <input
+              type="number"
+              name="value"
+              id="valueInput"
+              min="0"
+              value={ value }
+              onChange={ this.handleChange }
+              data-testid="value-input"
+            />
+          </label>
+          <label htmlFor="currency">
+            Moeda
+            <select
+              name="currency"
+              id="currency"
+              value={ currency }
+              onChange={ this.handleChange }
+              data-testid="currency-input"
+            >
+              {currencies.map((curr) => (
+                <option key={ curr }>{curr}</option>
+              ))}
+            </select>
+          </label>
+        </div>
         <label htmlFor="method">
           Método de pagamento
           <select
@@ -106,7 +109,7 @@ class WalletForm extends Component {
           </select>
         </label>
         <label htmlFor="descInput">
-          Descrição:
+          Descrição
           <input
             type="text"
             id="descInput"

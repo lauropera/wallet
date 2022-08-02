@@ -39,7 +39,7 @@ class LoginForm extends Component {
   render() {
     const { buttonDisabled } = this.state;
     return (
-      <form onSubmit={ this.handleSubmit }>
+      <form onSubmit={ this.handleSubmit } className="Login-Form">
         <label htmlFor="email">
           Email
           <input
