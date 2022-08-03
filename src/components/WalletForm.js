@@ -9,6 +9,7 @@ import {
 import '../styles/WalletForm.css';
 
 const INITIAL_STATE = {
+  id: 0,
   value: '',
   currency: 'USD',
   method: 'Dinheiro',
@@ -34,10 +35,13 @@ class WalletForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { saveNewExpense, editor, editExpense, expenseToEdit } = this.props;
+    console.log(editor);
     if (editor) {
-      editExpense({ ...expenseToEdit, ...this.state });
-    } else saveNewExpense(this.state);
-    this.setState(INITIAL_STATE);
+      editExpense({ ...expenseToEdit, ...this.state, id: expenseToEdit.id });
+    } else {
+      saveNewExpense(this.state);
+      this.setState(({ id }) => ({ ...INITIAL_STATE, id: id + 1 }));
+    }
   };
 
   saveCurrencies = async () => {
@@ -57,7 +61,6 @@ class WalletForm extends Component {
               type="number"
               name="value"
               id="valueInput"
-              min="0"
               value={ value }
               onChange={ this.handleChange }
               data-testid="value-input"
@@ -79,7 +82,7 @@ class WalletForm extends Component {
           </label>
         </div>
         <label htmlFor="method">
-          Método de pagamento
+          Pagamento
           <select
             name="method"
             id="method"
@@ -114,6 +117,7 @@ class WalletForm extends Component {
             type="text"
             id="descInput"
             name="description"
+            maxLength="180"
             value={ description }
             onChange={ this.handleChange }
             data-testid="description-input"
@@ -122,7 +126,12 @@ class WalletForm extends Component {
         {editor ? (
           <button type="submit">Editar despesa</button>
         ) : (
-          <button type="submit">Adicionar despesa</button>
+          <button
+            type="submit"
+            disabled={ !(value.length > 0 && description.length > 0) }
+          >
+            Adicionar despesa
+          </button>
         )}
       </form>
     );
@@ -146,6 +155,7 @@ WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   editor: PropTypes.bool.isRequired,
   expenseToEdit: PropTypes.shape({
+    id: PropTypes.number,
     value: PropTypes.string,
     currency: PropTypes.string,
     method: PropTypes.string,

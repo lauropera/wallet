@@ -25,10 +25,8 @@ export const saveNewExpense = (payload) => ({
 
 export const getCurrencies = () => async (dispatch) => {
   const currencies = await fetchCurrencies();
-  const dataWithoutUSDT = Object.entries(currencies)
-    .filter((elem) => elem[0] !== 'USDT');
-  const newData = Object.fromEntries(dataWithoutUSDT);
-  dispatch(saveCurrencies(Object.keys(newData)));
+  delete currencies.USDT;
+  dispatch(saveCurrencies(Object.keys(currencies)));
 };
 
 export const newExpense = (expense) => async (dispatch) => {

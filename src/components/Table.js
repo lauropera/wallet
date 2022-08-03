@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 import {
   deleteExpense as deleteExpenseAction,
   editExpense as editExpenseAction,
@@ -29,8 +30,13 @@ class Table extends Component {
           <tbody>
             {expenses.map(
               ({
-                id, description, tag, method,
-                value, exchangeRates, currency,
+                id,
+                description,
+                tag,
+                method,
+                value,
+                exchangeRates,
+                currency,
               }) => (
                 <tr key={ id }>
                   <td>{description}</td>
@@ -42,22 +48,24 @@ class Table extends Component {
                   <td>{(value * exchangeRates[currency].ask).toFixed(2)}</td>
                   <td>Real</td>
                   <td>
-                    <button
-                      id={ id }
-                      type="button"
-                      onClick={ () => editExpense(id) }
-                      data-testid="edit-btn"
-                    >
-                      Editar
-                    </button>
-                    <button
-                      id={ id }
-                      type="button"
-                      onClick={ () => deleteExpense(id) }
-                      data-testid="delete-btn"
-                    >
-                      Excluir
-                    </button>
+                    <div className="Buttons-Container">
+                      <button
+                        id={ id }
+                        type="button"
+                        onClick={ () => editExpense(id) }
+                        data-testid="edit-btn"
+                      >
+                        <FaPencilAlt />
+                      </button>
+                      <button
+                        id={ id }
+                        type="button"
+                        onClick={ () => deleteExpense(id) }
+                        data-testid="delete-btn"
+                      >
+                        <FaTrashAlt />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ),

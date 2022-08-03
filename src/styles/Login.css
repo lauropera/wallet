@@ -2,33 +2,77 @@
   align-items: center;
   display: flex;
   height: 100vh;
+  justify-content: center;
   width: 100vw;
+}
+
+.Login-Title , .Title {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  justify-content: left;
+}
+
+.Login-Title {
+  user-select: none;
+  width: 280px;
+}
+
+.Login-Title svg , .Title svg {
+  font-size: 3rem;
 }
 
 .Login-Form {
   align-items: center;
-  border: 1px solid black;
+  border-radius: 6px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
   display: flex;
   flex-direction: column;
   gap: 4vh;
   justify-content: center;
   min-height: 60vh;
-  width: 100%;
+  width: 340px;
 }
 
 .Login-Form label {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  min-width: 40vw;
+  position: relative;
+  width: 280px;
 }
 
 .Login-Form input {
   padding: 0.6rem;
+  padding-left: 2.4rem;
 }
 
 .Login-Form button {
-  cursor: pointer;
-  min-width: 40vw;
   padding: 0.6rem;
+  transition: 0.3s;
+  width: 280px;
+}
+
+.Login-Form button:disabled , .Wallet-Form button:disabled {
+  opacity: 0.4;
+  transition: 0.3s;
+}
+
+.Icon {
+  font-size: 1.5rem;
+  left: 0.4rem;
+  position: absolute;
+  top: 50%;
+}
+
+@media screen and ( max-width : 600px ) {
+
+  .Login-Form {
+    height: 100vh;
+    width: 320px;
+  }
+
+  .Login-Title {
+    font-size: 1.2rem;
+  }
 }

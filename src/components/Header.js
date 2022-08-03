@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { IoIosWallet, IoMdPerson } from 'react-icons/io';
 import '../styles/Header.css';
+import { Redirect } from 'react-router-dom';
 
 class Header extends Component {
   totalExpenses = () => {
@@ -15,14 +17,22 @@ class Header extends Component {
 
   render() {
     const { email } = this.props;
+    if (email === '') return <Redirect to="/login" />;
     return (
       <header className="Header">
-        <h1>Wallet</h1>
+        <div className="Title">
+          <IoIosWallet />
+          <h1>Wallet.</h1>
+        </div>
         <div className="Header-Informations">
-          <p data-testid="email-field">{email}</p>
           <div>
+            <span>R$</span>
             <p data-testid="total-field">{this.totalExpenses()}</p>
             <p data-testid="header-currency-field">BRL</p>
+          </div>
+          <div>
+            <IoMdPerson />
+            <p data-testid="email-field">{email}</p>
           </div>
         </div>
       </header>

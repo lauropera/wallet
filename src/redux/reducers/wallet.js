@@ -30,13 +30,7 @@ function wallet(state = INITIAL_STATE, action) {
   case SAVE_NEW_EXPENSE:
     return {
       ...state,
-      expenses: [
-        ...state.expenses,
-        {
-          id: state.expenses.length,
-          ...action.payload,
-        },
-      ],
+      expenses: [...state.expenses, action.payload],
     };
   case DELETE_EXPENSE:
     return {
@@ -58,6 +52,7 @@ function wallet(state = INITIAL_STATE, action) {
         ...updatedExpenses(state.expenses, state.idToEdit, action.payload),
       ],
       idToEdit: 0,
+      expenseToEdit: {},
     };
   default:
     return state;

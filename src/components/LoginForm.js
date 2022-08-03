@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { IoIosWallet, IoIosMail, IoMdKey } from 'react-icons/io';
 import { userLogin as loginAction } from '../redux/actions';
 
 class LoginForm extends Component {
@@ -40,8 +41,13 @@ class LoginForm extends Component {
     const { buttonDisabled } = this.state;
     return (
       <form onSubmit={ this.handleSubmit } className="Login-Form">
+        <div className="Login-Title">
+          <IoIosWallet />
+          <h1>Wallet.</h1>
+        </div>
         <label htmlFor="email">
           Email
+          <IoIosMail className="Icon" />
           <input
             type="email"
             name="email"
@@ -52,6 +58,7 @@ class LoginForm extends Component {
         </label>
         <label htmlFor="password">
           Senha
+          <IoMdKey className="Icon" />
           <input
             type="password"
             id="password"

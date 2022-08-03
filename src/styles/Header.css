@@ -1,13 +1,16 @@
 .Header {
   align-items: center;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  justify-content: space-evenly;
   padding: 1rem;
 }
 
 .Header h1 {
-  font-size: 1.6rem;
+  font-size: 2.4rem;
+}
+
+.Title {
+  width: 50%;
 }
 
 .Header-Informations {
@@ -19,12 +22,39 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  padding: 0.4rem;
-  width: 90%;
+  padding: 0.6rem;
+  width: 300px;
 }
 
 .Header-Informations div {
+  align-items: center;
   display: flex;
-  justify-content: space-evenly;
-  width: 40%;
+  gap: 4px;
+}
+
+@media screen and ( max-width : 600px ) {
+
+  .Header {
+    flex-direction: column;
+    gap: 8px;
+    padding: 1rem 0;
+  }
+
+  .Header h1 {
+    font-size: 1.8rem;
+  }
+
+  .Title {
+    gap: 0;
+    padding: 12px 0;
+    width: 90%;
+  }
+
+  .Title svg {
+    font-size: 2.6rem;
+  }
+
+  .Header-Informations {
+    width: 90%;
+  }
 }
