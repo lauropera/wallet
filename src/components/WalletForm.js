@@ -35,7 +35,6 @@ class WalletForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { saveNewExpense, editor, editExpense, expenseToEdit } = this.props;
-    console.log(editor);
     if (editor) {
       editExpense({ ...expenseToEdit, ...this.state, id: expenseToEdit.id });
     } else {
