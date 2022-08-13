@@ -16,12 +16,14 @@ class LoginForm extends Component {
   onInputChange = ({ target }) => {
     const MIN_PASS_LENGTH = 6;
     const { email } = this.state;
-    this.setState({
-      [target.name]: target.value,
-      buttonDisabled:
-        !(target.value.length >= MIN_PASS_LENGTH
-        && this.validateEmail(email)),
-    });
+    this.setState({ [target.name]: target.value });
+    if (target.id === 'password') {
+      this.setState({
+        buttonDisabled:
+          !(target.value.length >= MIN_PASS_LENGTH
+          && this.validateEmail(email)),
+      });
+    }
   };
 
   handleSubmit = (e) => {
