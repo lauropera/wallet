@@ -1,6 +1,6 @@
 # :credit_card: Wallet
 
-![Preview Projeto](./imgs/Readme-gif.gif)
+![Preview Projeto](./imgs/Readme-Gif.gif)
 
 ## Acesse meu projeto <a href="https://lauropera.github.io/wallet/">AQUI</a>
 
