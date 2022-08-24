@@ -26,7 +26,7 @@ Nesse projeto desenvolvemos uma aplicação para controle de gastos. Colocamos e
 # :camera: Screenshots
 
 ![PC Screenshot](./imgs/Login-DesktopPreview.png)
-![PC Screenshot](./imgs/Desktop-DesktopPreview.png)
+![PC Screenshot](./imgs/Wallet-DesktopPreview.png)
 
 ## :heavy_check_mark: Nota
 ![Minha nota no projeto](./imgs/nota-projeto.png)
