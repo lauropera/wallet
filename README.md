@@ -16,7 +16,7 @@ Nesse projeto desenvolvemos uma aplicação para controle de gastos. Colocamos e
 
 ## ⚙️ Tecnologias
 
-* HTML
+* HTML5
 * CSS
 * JavaScript
 * React.js
