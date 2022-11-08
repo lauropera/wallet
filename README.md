@@ -14,40 +14,25 @@ Nesse projeto desenvolvemos uma aplicação para controle de gastos. Colocamos e
 
 <br />
 
-## ⚙️ Tecnologias
-
-* HTML5
-* CSS
-* JavaScript
-* React.js
-* React Router
-* Redux
-
-<br />
-
-## 📚 Documentação
+## 🚀 Instalação e execução
 
   <details>
-    <summary>Instalação e execução</summary>
+    <summary>Instalando e executando</summary>
     <br />
 
-- Faça o fork do repositório:
-  Tutorial [AQUI](https://github.com/UNIVALI-LITE/Portugol-Studio/wiki/Fazendo-um-Fork-do-reposit%C3%B3rio)
-- Abra seu terminal e navegue até a pasta onde preferir alocar o projeto.
+### 1 - Clone o repositório:
 
-- Clone o repositório:
+```
+git clone git@github.com:lauropera/wallet.git
+```
 
-  ```sh
-    git clone git@github.com:"SeuNomeNoGitHub"/wallet.git
-  ```
-
-- Apos ter o repositório clonado em sua maquina, execute este comando para acessar a parta do projeto:
+### 2 - Apos ter o repositório clonado em sua maquina, execute este comando para acessar a pasta do projeto:
 
   ```sh
     cd wallet
   ```
 
-- Dentro da pasta do projeto, execute o comando abaixo para instalar as dependências do projeto:
+### 3 - Dentro da pasta do projeto, execute o comando abaixo para instalar as dependências do projeto:
 
   Caso utilize o npm:
 
@@ -61,7 +46,7 @@ Nesse projeto desenvolvemos uma aplicação para controle de gastos. Colocamos e
     yarn install
   ```
 
-- Dentro da pasta do projeto, execute o comando abaixo para iniciar o servidor do projeto:
+### 4 - Dentro da pasta do projeto, execute o comando abaixo para iniciar o servidor do projeto:
 
       Caso utilize o npm:
 
@@ -75,11 +60,12 @@ Nesse projeto desenvolvemos uma aplicação para controle de gastos. Colocamos e
         yarn start
       ```
 
-  O aplicativo sera executado em modo de desenvolvimento.
+### 5 - Acesse a aplicação:
+
   Abrindo na porta padrão que o React usa: <http://localhost:3000/> em seu navegador.
 
-    </details>
-  <br />
+  </details>
+<br />
 
 # 📱 Mobile
 
@@ -92,7 +78,16 @@ Nesse projeto desenvolvemos uma aplicação para controle de gastos. Colocamos e
 ![PC Screenshot](./imgs/Login-DesktopPreview.png)
 ![PC Screenshot](./imgs/Wallet-DesktopPreview.png)
 
-#
+## ⚙️ Tecnologias
+
+* HTML5
+* CSS
+* JavaScript
+* React.js
+* React Router
+* Redux
+
+<br />
 
 <div>
   <p align="center">🍐</p>
